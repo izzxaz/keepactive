@@ -10,6 +10,8 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+        long sleepTime = 30L;
+        if (args != null && args.length >= 1) sleepTime = new Long(args[0]);
         String action;
         ThreadExecutor te = new ThreadExecutor();
         Scanner sc = new Scanner(System.in);
@@ -18,7 +20,7 @@ public class Main {
             action = sc.nextLine();
             switch (action) {
                 case "run":
-                    if (te.running == false) te.execute(new ClickKeyBoard());
+                    if (te.running == false) te.execute(new ClickKeyBoard(sleepTime));
                     break;
                 case "stop":
                     if (te.running == true) te.shutdown();
