@@ -17,7 +17,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         lableStatus:
         while (true) {
-            action = sc.nextLine();
+            action = sc.nextLine().toLowerCase();
             switch (action) {
                 case "run":
                     if (te.running == false) te.execute(new ClickKeyBoard(sleepTime));
