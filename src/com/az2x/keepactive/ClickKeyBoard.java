@@ -23,7 +23,6 @@ public class ClickKeyBoard implements Runnable {
                 TimeUnit.MILLISECONDS.sleep(sleepTime);
                 robot.keyRelease(KeyEvent.VK_CAPS_LOCK);
                 System.out.println("已按下CapsLock");
-                //每分钟按一次
                 TimeUnit.SECONDS.sleep(3);
             }
         } catch (AWTException e) {

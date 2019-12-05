@@ -20,13 +20,13 @@ public class Main {
             action = sc.nextLine().toLowerCase();
             switch (action) {
                 case "run":
-                    if (te.running == false) te.execute(new ClickKeyBoard(sleepTime));
+                    if (te.isRunning() == false) te.execute(new ClickKeyBoard(sleepTime));
                     break;
                 case "stop":
-                    if (te.running == true) te.shutdown();
+                    if (te.isRunning() == true) te.shutdown();
                     break;
                 case "exit":
-                    if (te.running == true) te.shutdown();
+                    if (te.isRunning() == true) te.shutdown();
                     break lableStatus;
                 default:
                     break;
