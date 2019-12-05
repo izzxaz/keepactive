@@ -1,7 +1,5 @@
 package com.az2x.keepactive;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * 通用线程执行器。
  * 为了防止传入的线程发生异常无法结束，使其成为守护线程，并由线程执行器提供的管理线程管理。
@@ -48,11 +46,10 @@ public class ThreadExecutor {
         while (!finished) {
             if (System.currentTimeMillis() - current > millions) {
                 executeService.interrupt();
-                break;
             }
-            //每间隔100ms尝试执行一次打断
+            //让执行线程休眠
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                executeService.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -63,8 +60,13 @@ public class ThreadExecutor {
      * 立刻打断主线程，强迫守护线程终止
      */
     public void shutdown() {
-        if (!finished) {
+        while (!finished) {
             executeService.interrupt();
+            try {
+                executeService.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
