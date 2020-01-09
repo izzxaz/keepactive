@@ -20,10 +20,10 @@ public class ClickKeyBoard implements Runnable {
             Robot robot = new Robot();
             while (true) {
                 robot.keyPress(KeyEvent.VK_CAPS_LOCK);
-                TimeUnit.MILLISECONDS.sleep(sleepTime);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 robot.keyRelease(KeyEvent.VK_CAPS_LOCK);
                 System.out.println("已按下CapsLock");
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(sleepTime);
             }
         } catch (AWTException e) {
             e.printStackTrace();

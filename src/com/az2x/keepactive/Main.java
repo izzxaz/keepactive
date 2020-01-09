@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        long sleepTime = 30L;
+        long sleepTime = 5L;
         if (args != null && args.length >= 1) sleepTime = new Long(args[0]);
         String action;
         ThreadExecutor te = new ThreadExecutor();

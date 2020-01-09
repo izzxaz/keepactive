@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 通用线程执行器。
- * 为了防止传入的线程发生异常无法结束，使其成为守护线程，并由线程执行器提供的管理线程管理。
  */
 public class ThreadExecutor {
     private Thread executeService;
@@ -16,17 +15,19 @@ public class ThreadExecutor {
     }
 
     public boolean isRunning() {
-        return executeService.isAlive();
+        if (executeService == null) return false;
+        if (executeService.isAlive()) return true;
+        return false;
     }
 
     /**
-     * 当millions时间之后还未执行完毕，则打断被守护线程，强迫守护线程终止。
+     * 当millions时间之后还未执行完毕，则打断。
      *
      * @param millions
      */
     public void shutdown(long millions) {
         long current = System.currentTimeMillis();
-        while (!isRunning()) {
+        while (isRunning()) {
             if (System.currentTimeMillis() - current > millions) {
                 executeService.interrupt();
             }
@@ -39,10 +40,10 @@ public class ThreadExecutor {
     }
 
     /**
-     * 立刻打断主线程，强迫守护线程终止
+     * 立刻打断线程
      */
     public void shutdown() {
-        while (!isRunning()) {
+        while (isRunning()) {
             executeService.interrupt();
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
